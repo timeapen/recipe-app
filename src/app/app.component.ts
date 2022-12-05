@@ -9,12 +9,4 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 })
 export class AppComponent {
 
-  feature: string = 'recipes';
-  showShoppingList: boolean = false;
-
-  onFeatureSelected(feature: string) {
-    console.log('Feature selected: ', feature);
-    this.feature = feature;
-  }
-
 }
