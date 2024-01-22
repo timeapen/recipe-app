@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs'
+import { Subject, ignoreElements } from 'rxjs'
 import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { Ingredient } from '../shared/ingredient.model';
 export class ShoppingListService {
 
   ingredientsChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
 
   private ingredients: Ingredient[] = [
     new Ingredient('Apple', 5),
@@ -18,14 +19,20 @@ export class ShoppingListService {
 
   onIngredientAdded(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    console.log('Adding ingredient in service: ', ingredient);
-    console.log('Ingredients: ', this.ingredients);
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
 
+  onUpdateIngredient(index: number, ingredient: Ingredient) {
+    this.ingredients[index] = ingredient;
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
   getIngredients() {
     return this.ingredients.slice();
+  }
+
+  getIngredient(index: number): Ingredient {
+    return this.ingredients[index];
   }
 
   addIngredients(ingredients: Ingredient[]) {
