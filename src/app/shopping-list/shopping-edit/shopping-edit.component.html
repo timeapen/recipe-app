@@ -26,15 +26,15 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="col-xs-1">
+                    <span>
                         <button class="btn btn-success" type="submit" [disabled]="!f.valid && f.touched">{{ editMode ? 'Update' : 'Add' }}</button>
-                    </div>
-                    <div class="col-xs-1">
-                        <button class="btn btn-danger" type="button">Delete</button>
-                    </div>
-                    <div class="col-xs-1">
+                    </span>
+                    <span *ngIf="editMode">
+                        <button class="btn btn-danger" type="button" (click)="onDeleteIngredient()">Delete</button>
+                    </span>
+                    <span>
                         <button class="btn btn-primary" type="button" (click)="onClearEdit()">Clear</button>
-                    </div>
+                    </span>
                 </div>
             </div>
         </form>

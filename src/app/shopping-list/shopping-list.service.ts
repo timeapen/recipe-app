@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, ignoreElements } from 'rxjs'
+import { Subject } from 'rxjs'
 import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable({
@@ -37,6 +37,11 @@ export class ShoppingListService {
 
   addIngredients(ingredients: Ingredient[]) {
     this.ingredients.push(...ingredients);
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  onDeleteIngredient(index: number) {
+    this.ingredients.splice(index, 1);
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
