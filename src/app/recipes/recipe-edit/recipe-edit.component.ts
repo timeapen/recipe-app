@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 
@@ -67,6 +67,15 @@ export class RecipeEditComponent implements OnInit {
 
   onSubmit() {
     console.debug(this.recipeForm);
+  }
+
+  onAddIngredient() {
+    (this.recipeForm.get('ingredients') as FormArray).push(
+      new FormGroup( {
+        'name': new FormControl(),
+        'amount': new FormControl()
+      })
+    )
   }
 
 }
