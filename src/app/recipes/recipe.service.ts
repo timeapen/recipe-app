@@ -34,13 +34,19 @@ export class RecipeService {
     return this.recipes[id];
   }
 
-  addRecipe(recipe: Recipe) {
+  addRecipe(recipe: Recipe) : number {
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
+    return this.recipes.length - 1;
   }
 
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());
   }
 
