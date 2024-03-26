@@ -26,7 +26,7 @@ export class RecipeService {
 
   constructor() { }
 
-  getRecipes() {
+  getRecipes(): Recipe[] {
     return this.recipes.slice();
   }
 
